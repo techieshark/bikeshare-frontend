@@ -221,7 +221,7 @@ function mapCreate(center) {
   let lon = -96.67;
 
   // Grab IP location from freegeoip API
-  const geoLocationProviderURL = 'http://freegeoip.net/json/';
+  const geoLocationProviderURL = 'https://freegeoip.net/json/';
   fetch(geoLocationProviderURL)
     .then(resp => resp.json())
     .then((data) => {
