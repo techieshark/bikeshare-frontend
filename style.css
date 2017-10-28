@@ -7,6 +7,16 @@
   cursor: pointer;
 }
 
+/********** Directions Input ****************************************/
+
+
+
+/********** Station Popup *******************************************/
+
+.station-popup--container .mapboxgl-popup-content {
+  padding-bottom: 6px;
+}
+
 .station-popup {
   text-align: center;
 }
@@ -15,16 +25,11 @@
   margin-bottom: 1em;
 }
 
-div.station-popup--directions {
-  /* border-radius: 5px; */
-  /* background: #a1a1da; */
-  /* padding: 1em; */
-  /* text-align: center; */
-}
+/* div.station-popup--directions {
+} */
 
 div.station-popup--directions a{
   text-decoration: none;
-  /* color: white; */
 }
 
 .station-popup--coordinates {
@@ -47,10 +52,6 @@ div.station-popup--directions a{
 div.station-popup--stats {
   margin-bottom: 0 !important;
   font-weight: bold;
-}
-
-.station-popup--container .mapboxgl-popup-content {
-  padding-bottom: 6px;
 }
 
 .station-popup--alert {
