@@ -6,3 +6,55 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.station-popup {
+  text-align: center;
+}
+
+.station-popup h3 {
+  margin-bottom: 1em;
+}
+
+div.station-popup--directions {
+  /* border-radius: 5px; */
+  /* background: #a1a1da; */
+  /* padding: 1em; */
+  /* text-align: center; */
+}
+
+div.station-popup--directions a{
+  text-decoration: none;
+  /* color: white; */
+}
+
+.station-popup--coordinates {
+  border-top: 1px solid lightgrey;
+  text-align: right;
+  padding-top: 0.5em;
+  margin-top: 0.5em;
+
+  font-size: smaller;
+  color: lightgrey;
+}
+
+.station-popup--bikes-number, .station-popup--docks-number {
+  font-size: large;
+}
+
+/* .station-popup--bikes-text, .station-popup--docks-text {
+} */
+
+div.station-popup--stats {
+  margin-bottom: 0 !important;
+  font-weight: bold;
+}
+
+.station-popup--container .mapboxgl-popup-content {
+  padding-bottom: 6px;
+}
+
+.station-popup--alert {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 1em;
+}
