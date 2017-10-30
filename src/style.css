@@ -7,6 +7,20 @@
   cursor: pointer;
 }
 
+.map-marker-directions {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+  width: 20px;
+}
+
+.map-marker-directions.is-origin {
+  background-image: url('map-dot-origin.svg');
+}
+.map-marker-directions.is-destination {
+  background-image: url('map-dot-destination.svg');
+}
+
 /********** Directions Input ****************************************/
 
 .directions {

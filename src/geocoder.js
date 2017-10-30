@@ -19,6 +19,7 @@ export function reverseGeocode(lat, lng, callback) {
   });
 }
 
+
 /**
  * Geocode address - using Mapbox under the hood.
  * @param {*} address
