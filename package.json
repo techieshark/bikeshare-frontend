@@ -1,0 +1,12 @@
+{
+  "name": "bikeshare-frontend",
+  "version": "1.0.0",
+  "description": "Bike share frontend",
+  "main": "app.js",
+  "repository": "git@github.com:techieshark/bikeshare-frontend.git",
+  "author": "Peter W <techieshark@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^3.8.1"
+  }
+}
