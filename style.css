@@ -9,6 +9,48 @@
 
 /********** Directions Input ****************************************/
 
+.directions {
+  position: absolute;
+  padding: 1em;
+  margin: 1em;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+#directions--distance-range {
+  width: 157px;
+}
+
+.directions--distance-picker {
+  margin-bottom: 2em;
+}
+
+#directions--distance-range .noUi-connect {
+  background-color: rgb(222, 224, 224);
+  box-shadow: inset 0 0 1px rgba(51,51,51,.2);
+}
+
+.directions--locate-origin.column {
+  padding-left: 0;
+}
+
+.directions--locate-origin button{
+  background-image: url('locate-person.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  width: 38px;
+  /* border-color: #cccccc; */
+  /* background-color: white; */
+  /* box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.18); */
+  /* box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1); */
+  /* box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB; */
+  /* transition-property: all; */
+  /* transition-duration: 0.3s; */
+}
+
+/* .directions--locate-origin button.is-light:hover {
+  border-color: black;
+} */
 
 
 /********** Station Popup *******************************************/
