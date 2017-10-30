@@ -8,7 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "css-loader": "^0.28.7",
+    "eslint": "^4.10.0",
     "file-loader": "^1.1.5",
+    "mapbox-geocoding": "^0.1.4",
     "nouislider": "^10.1.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1"
@@ -16,6 +18,12 @@
   "scripts": {
     "build": "webpack && cp src/index.html dist/",
     "clean": "rm -rf dist/*",
-    "start": "cd dist && http-server -p 3000"
+    "start": "cd dist && http-server -p 3000",
+    "lint": "./node_modules/eslint/bin/eslint.js src/",
+    "lintfix": "./node_modules/eslint/bin/eslint.js --fix src/"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
   }
 }
