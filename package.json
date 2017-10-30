@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "webpack && cp src/index.html dist/",
-    "clean": "rm -rf dist/*"
+    "clean": "rm -rf dist/*",
+    "start": "cd dist && http-server -p 3000"
   }
 }
