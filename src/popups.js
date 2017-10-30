@@ -10,12 +10,11 @@ function getDirectionsLink(toAddr = '', fromAddr = '', toLat, toLng) {
   // "Civic Center/UN Plaza BART Station (Market St at McAllister St)" - currently that results
   // in directions from civic center to UN plaza (b/c g-maps separates locations with a '/')
   const baseURL = 'https://www.google.com/maps/dir';
-  const coords = toLat ? `${toLat},${toLng},`: '';
+  const coords = toLat ? `${toLat},${toLng},` : '';
   const zoom = 17;
-  return `${baseURL}/${fromAddr}/${toAddr}/@${coords}${zoom}/`
+  return `${baseURL}/${fromAddr}/${toAddr}/@${coords}${zoom}/`;
   // Google maps expects addresses with name first, then plus-separated components like this:
   // Noisebridge,+2169+Mission+St,+San+Francisco,+CA+94110
-
 }
 
 /**
@@ -29,9 +28,10 @@ export default function getPopupContent(station) {
     longitude: lng,
     availableBikes: bikes,
     availableDocks: docks,
-    statusValue: status } = station.properties;
+    statusValue: status,
+  } = station.properties;
   const directionsURL = getDirectionsLink(addr, undefined, lat, lng);
-  let round = (n) => Number(n).toFixed(2);
+  const round = n => Number(n).toFixed(2);
 
   const alertMsg = (status === 'Not In Service') ? `<div class="station-popup--alert">${status}</div>` : '';
 
@@ -53,5 +53,5 @@ export default function getPopupContent(station) {
         <a rel="noopener noreferrer" target="_blank" href="${directionsURL}">Directions to here</a>
       </div>
       <div class="station-popup--coordinates">Lat/Long: <abbr title="${lat}, ${lng}">${round(lat)}, ${round(lng)}</abbr></div>
-    </div>`
+    </div>`;
 }
