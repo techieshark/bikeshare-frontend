@@ -7,6 +7,10 @@
   "author": "Peter W <techieshark@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@turf/buffer": "^4.7.4",
+    "@turf/circle": "^5.0.0",
+    "@turf/helpers": "^5.0.1",
+    "@turf/within": "^4.7.3",
     "css-loader": "^0.28.7",
     "eslint": "^4.10.0",
     "file-loader": "^1.1.5",
