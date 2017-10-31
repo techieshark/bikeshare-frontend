@@ -5,7 +5,7 @@ import initDirectionsControls from './directionsControls';
 import initMap from './map';
 import state from './state';
 
-window.appState = state; // for console debugging.
+window.appState = state; // XXX for console debugging.
 
 /* Initialization *************************** */
 
@@ -53,6 +53,10 @@ function initPage(lngLat, zoom) {
     })
     .catch((error) => {
       console.log(`Error fetching location data: ${error}`); // eslint-disable-line
-      initPage([lon, lat]); // go for it anyway, using defaults
+      if (error === 'Error: Coordinates must contain numbers') {
+        throw error;
+      } else {
+        initPage([lon, lat]); // go for it anyway, using defaults
+      }
     });
 }());

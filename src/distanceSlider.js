@@ -1,4 +1,6 @@
 import noUiSlider from './vendor/nouislider';
+import state from './state';
+import { mapUpdateNearby } from './map';
 
 export default function initDistanceSlider() {
   const range = {
@@ -29,7 +31,7 @@ export default function initDistanceSlider() {
 
   noUiSlider.create(slider, {
     range,
-    start: 0.25,
+    start: state.maxWalkDistance,
     step: 0.25,
     connect: [true, false],
     pips: {
@@ -42,9 +44,11 @@ export default function initDistanceSlider() {
 
   slider.noUiSlider.on('update', (values, handle) => {
     const value = values[handle];
-    // console.log('Searching within ' + value + ' miles.');
+    // console.log(`Searching within ${value} miles.`);
     const el = document.getElementById('directions--distance-value');
     el.innerText = `${Number(value).toFixed(2)} mi.`;
+    state.maxWalkDistance = parseFloat(value);
+    mapUpdateNearby();
   });
 }
 

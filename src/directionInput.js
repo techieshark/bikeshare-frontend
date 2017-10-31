@@ -1,5 +1,5 @@
 import { geocode } from './geocoder';
-import { flyTo, renderDirectionsMarker } from './map';
+import { mapUpdateDirectionsEndpoint } from './map';
 
 import state from './state';
 
@@ -12,29 +12,34 @@ function geocodingChangeHandler(location) {
 
   return function changeEventHandler(event) {
     const addr = event.target.value;
+    if (addr === '') {
+      // user cleared input - erase known point for location
+      stateLocation.longitude = null;
+      stateLocation.latitude = null;
+      stateLocation.address = null;
+      mapUpdateDirectionsEndpoint(location);
+      return;
+    }
     console.log('geocoding address: ', addr);
     geocode(addr, (err, geoData) => {
       if (!err) {
         const d = geoData;
-        if (
-          d.type === 'FeatureCollection' &&
-          d.features && d.features.length > 0 &&
-          d.features[0].place_name
+        if ( // ensure result looks as we expect from the API
+          d.type === 'FeatureCollection' && d.features && d.features.length > 0
         ) {
-          stateLocation.address = d.features[0].place_name;
+          if (d.features[0].place_name) {
+            stateLocation.address = d.features[0].place_name;
+          }
+          if (d.features[0].center) {
+            [stateLocation.longitude, stateLocation.latitude] = d.features[0].center;
+            console.log('gecoder returned coords:', [stateLocation.longitude, stateLocation.latitude]);
+          }
+          // XXX weird hack to ensure chrome updates state.
+          // stateLocation.newthing = 1;
+          // state[location].anothernewthing = 2;
+          console.log('app state:', state);
+          mapUpdateDirectionsEndpoint(location);
         }
-
-        if (
-          d.type === 'FeatureCollection' &&
-          d.features && d.features.length > 0
-          && d.features[0].center
-        ) {
-          [stateLocation.longitude, stateLocation.latitude] = d.features[0].center;
-        }
-        console.log('gecoder returned coords:', [stateLocation.longitude, stateLocation.latitude]);
-        console.log('app state:', state);
-        renderDirectionsMarker(location);
-        flyTo(location);
         // callback(err, geoData, state.destinationAddr);
       } else {
         console.log(`error geocoding ${addr}: ${err}`); //eslint-disable-line

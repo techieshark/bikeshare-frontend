@@ -1,6 +1,6 @@
 
 import state from './state';
-import { flyTo } from './map';
+import { mapUpdateDirectionsEndpoint } from './map';
 
 import userReverseGeocode from './userReverseGeocode';
 
@@ -18,7 +18,7 @@ export default function initOriginLocatorBtn() {
     if (state.user.address) {
       orig.value = state.user.address;
       state.origin = { ...state.user };
-      flyTo('origin');
+      mapUpdateDirectionsEndpoint('origin');
     } else {
       console.log('fetching your address...');
       navigator.geolocation.getCurrentPosition((position) => {
@@ -27,7 +27,7 @@ export default function initOriginLocatorBtn() {
         state.user.latitude = latitude;
         state.user.longitude = longitude;
         state.origin = { ...state.user };
-        flyTo('origin');
+        mapUpdateDirectionsEndpoint('origin');
         userReverseGeocode((err, data, address) => {
           orig.value = address;
           state.user.address = address;
