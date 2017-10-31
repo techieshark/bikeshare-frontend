@@ -1,6 +1,7 @@
 
 // Application state.
 export default {
+  maxWalkDistance: 0.25,
   user: {
     longitude: null,
     latitude: null,
