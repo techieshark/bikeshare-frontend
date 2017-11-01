@@ -14,7 +14,7 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.10.0",
     "file-loader": "^1.1.5",
-    "mapbox-geocoding": "^0.1.4",
+    "mapbox-geocoding": "https://github.com/techieshark/mapbox-geocoding/tarball/26c746f58a27c9e863e3b0d2cf40acd5931b2403",
     "nouislider": "^10.1.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1"
@@ -22,6 +22,9 @@
   "scripts": {
     "build": "webpack && cp src/index.html dist/",
     "build-min": "webpack --optimize-minimize && cp src/index.html dist/",
+    "watch": "webpack --progress --watch",
+    "start": "cp src/index.html dist/ && webpack-dev-server --https --cert=ssl/cert.pem --key=ssl/key.pem --open",
+    "start-prod": "cd dist && http-server -S -C ../ssl/cert.pem -K ../ssl/key.pem -p 8081",
     "build-debug": "webpack --display-modules",
     "clean": "rm -rf dist/*",
     "start": "cd dist && http-server -p 3000",
@@ -34,6 +37,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "webpack-dev-server": "^2.9.3"
   }
 }

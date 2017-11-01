@@ -1,5 +1,9 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+ssl/
+*.pem
+*.p12
+
 # dependencies
 /node_modules
 
