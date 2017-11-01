@@ -18,7 +18,7 @@ export default function userReverseGeocode(callback = () => {}) {
     ) {
       state.user.address = d.features[0].place_name;
     }
-    console.log('got addr:', geoData);
+    console.log('fetched reverse geocoder response for coords:', geoData);
     callback(err, geoData, state.user.address);
   });
 }
