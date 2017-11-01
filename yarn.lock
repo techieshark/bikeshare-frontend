@@ -315,6 +315,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+autocompleter@^1.0.29:
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/autocompleter/-/autocompleter-1.0.29.tgz#35f093ce28694725bd73b13b39e31e4e16b225c6"
+
 autoprefixer@^6.3.1:
   version "6.7.7"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
@@ -2947,9 +2951,9 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-mapbox-geocoding@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/mapbox-geocoding/-/mapbox-geocoding-0.1.5.tgz#97c4048669eb4431088cef2ea9a9078c6eb9f8ed"
+"mapbox-geocoding@https://github.com/techieshark/mapbox-geocoding/tarball/e2f450b1ca8b50d42c7ffc32e8e15cb8fbf1e98c":
+  version "0.1.4"
+  resolved "https://github.com/techieshark/mapbox-geocoding/tarball/e2f450b1ca8b50d42c7ffc32e8e15cb8fbf1e98c#a9033e3eb35e4b23ffa74d39ec2e630c95ec0365"
   dependencies:
     request "^2.67.0"
 
@@ -4942,3 +4946,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zepto@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/zepto/-/zepto-1.2.0.tgz#e127bd9e66fd846be5eab48c1394882f7c0e4f98"
