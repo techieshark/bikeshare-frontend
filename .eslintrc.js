@@ -6,5 +6,6 @@ module.exports = {
         "window": false,
         "fetch": false,
         "mapboxgl": false,
+        "$": false,
     }
 };

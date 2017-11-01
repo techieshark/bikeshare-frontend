@@ -22,8 +22,8 @@ export function reverseGeocode(lat, lng, callback) {
 
 /**
  * Geocode address - using Mapbox under the hood.
- * @param {*} address
- * @param {*} callback: (err, geoData) => any
+ * @param {string} address
+ * @param {Function} callback: (err, geoData) => any
  */
 export function geocode(address, callback) {
   // Geocode an address to coordinates
@@ -33,3 +33,20 @@ export function geocode(address, callback) {
   });
 }
 
+
+/**
+ * Bias geocoding results near the center.
+ * @param {[longitude,latitude]} center for proximity bias
+ */
+export function setGeocderCenter(center) {
+  geo.setSearchCenter(center);
+}
+
+
+/**
+ * Search withing the given bounding box
+ * @param {string} bbox bounding box string in format minX,minY,maxX,maxY
+ */
+export function setGeocoderBounds(bbox) {
+  geo.setSearchBounds(bbox);
+}

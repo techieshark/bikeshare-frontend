@@ -60,6 +60,24 @@
   border-color: black;
 } */
 
+/********** Directions Autocomplete **********************************/
+
+.autocomplete {
+  background: white;
+  z-index: 100;
+  border: 1px solid #e4e2e2;
+}
+
+.autocomplete div {
+  border-top: 1px solid #adadad;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.autocomplete div:hover, .autocomplete div:focus {
+  background: rgb(202, 206, 227);
+}
+
 
 /********** Station Popup *******************************************/
 

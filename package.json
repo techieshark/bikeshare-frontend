@@ -12,13 +12,15 @@
     "@turf/circle": "^5.0.0",
     "@turf/helpers": "^5.0.1",
     "@turf/within": "^4.7.3",
+    "autocompleter": "^1.0.29",
     "css-loader": "^0.28.7",
     "eslint": "^4.10.0",
     "file-loader": "^1.1.5",
-    "mapbox-geocoding": "^0.1.5",
+    "mapbox-geocoding": "https://github.com/techieshark/mapbox-geocoding/tarball/e2f450b1ca8b50d42c7ffc32e8e15cb8fbf1e98c",
     "nouislider": "^10.1.0",
     "style-loader": "^0.19.0",
-    "webpack": "^3.8.1"
+    "webpack": "^3.8.1",
+    "zepto": "^1.2.0"
   },
   "scripts": {
     "build": "webpack && cp src/index.html dist/",

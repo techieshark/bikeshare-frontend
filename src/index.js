@@ -4,6 +4,7 @@ import './favicon.ico';
 
 import initDirectionsControls from './directionsControls';
 import initMap from './map';
+import { setGeocoderBounds, setGeocderCenter } from './geocoder';
 import state from './state';
 
 window.appState = state; // XXX for console debugging.
@@ -33,6 +34,9 @@ function initPage(lngLat, zoom) {
   let lat = 37.611;
   let lon = -121.753;
   let zoom = 8;
+  setGeocderCenter([lon, lat]);
+  setGeocoderBounds('-123.5337,36.8931,-121.2082,38.8643');
+
 
   // eslint-disable-next-line no-extend-native
   Number.prototype.between = (min, max) => this > min && this < max;
