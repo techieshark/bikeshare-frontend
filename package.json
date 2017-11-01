@@ -7,6 +7,7 @@
   "author": "Peter W <techieshark@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@mapbox/polyline": "^0.2.0",
     "@turf/buffer": "^4.7.4",
     "@turf/circle": "^5.0.0",
     "@turf/helpers": "^5.0.1",

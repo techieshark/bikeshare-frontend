@@ -4,6 +4,8 @@ import turfWithin from '@turf/within';
 
 import getPopupContent from './popups';
 import userGeolocate from './userGeolocate';
+import fetchRoute from './router';
+
 import config from './config';
 import state from './state';
 
@@ -255,22 +257,88 @@ export function mapUpdateNearby() {
     if (state[location].latitude && state[location].longitude) {
       const nearbyStations = getStationsNear(location);
       console.log(`got stations near ${location}`, nearbyStations);
+
+      // if (map.isMoving()) {
+      //   console.log('NOTE: map was moving, rescheduling station update to end of move');
+      //   map.once('moveend', () => {
+      //     console.log('station update after move end');
+      //     showStationsNear(location, nearbyStations);
+      //   });
+      // } else {
+      //   console.log('map not moving; doing station update');
+      //   showStationsNear(location, nearbyStations);
+      // }
       showStationsNear(location, nearbyStations);
+    } else { // if we *don't* have a particular location endpoint,
+      // then we need to clear the markers
+      clearStationsNear(location);
     }
   });
 }
+
+function mapClearRoute() {
+  const routeLayer = map.getLayer('route');
+  if (routeLayer) {
+    map.removeLayer('route');
+  }
+}
+
+function mapUpdateRoute() {
+  if (state.origin.latitude && state.destination.latitude) {
+    fetchRoute(state.origin, state.destination, (routeLineString) => {
+
+      let source = map.getSource('route');
+      if (source) {
+        source.setData(routeLineString);
+      } else {
+        source = map.addSource('route', { type: 'geojson', data: routeLineString });
+      }
+
+      // place route beneath nearby markers (themselves beneath stations)
+      const layerAbove = getLayerIdForStationsNear('origin');
+
+      // creating source for the first time; add a layer for it.
+      // have to do this every time?
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        //  {
+        //   type: 'geojson',
+        //   data: routeLineString,
+        // },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round',
+        },
+        paint: {
+          'line-color': '#4AB2F7', // google maps blue #888
+          'line-width': 8,
+        },
+      }, layerAbove);
+    });
+  } else {
+    // we don't have both end points - ensure no route shown
+    mapClearRoute();
+  }
+}
+
 
 /**
  * Add or remove endpoint marker and update nearby stations.
  * @param {String} location origin or destination
  */
-export function mapUpdateDirectionsEndpoint(location) {
-  mapUpdateNearby();
-  if (state[location].latitude === null && markers[location]) {
+export function mapUpdateDirectionsEndpoint(location, stateLocation) {
+  console.log('mapUpdateDirectionsEndpoint()');
+  mapUpdateRoute();
+  if (state[location].latitude === null && endpointMarkers[location]) {
     // clear marker
-    markers[location].remove();
+    console.log(`clearing ${location} marker (no latitude)`);
+    endpointMarkers[location].remove();
+    endpointMarkers[location] = null;
   } else {
     renderDirectionsMarker(location);
     flyTo(location);
   }
+  mapUpdateNearby();
 }
