@@ -22,15 +22,22 @@ function geocodingChangeHandler(location) {
     geocode(addr, (err, geoData) => {
       if (!err) {
         const d = geoData;
+        console.log(`result from geocoding ${addr}: `, d);
         if ( // ensure result looks as we expect from the API
           d.type === 'FeatureCollection' && d.features && d.features.length > 0
         ) {
           if (d.features[0].place_name) {
+            console.log(`updating address for ${location} from
+              ${state[location].address} to
+              ${d.features[0].place_name}`);
             state[location].address = d.features[0].place_name;
           }
           if (d.features[0].center) {
-            console.log('gecoder returned coords:', [stateLocation.longitude, stateLocation.latitude]);
+            console.log(`updating lon for ${location} from
+              ${state[location].longitude},${state[location].latitude} to
+              ${d.features[0].center}`);
             [state[location].longitude, state[location].latitude] = d.features[0].center;
+            console.log('gecoder returned coords:', [state[location].longitude, state[location].latitude]);
           }
           console.log('app state:', state);
           mapUpdateDirectionsEndpoint(location);
