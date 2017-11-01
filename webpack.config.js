@@ -2,7 +2,11 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist'
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -21,6 +25,10 @@ module.exports = {
         use: [
           'file-loader',
         ],
+      },
+      { // see https://github.com/coryhouse/react-slingshot/issues/128#issuecomment-216363426
+          test: /\.ico$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+          loader: 'file-loader?name=[name].[ext]'  // <-- retain original file name
       },
       {
         test: /\.js$/,
