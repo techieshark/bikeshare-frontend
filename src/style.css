@@ -31,7 +31,8 @@
 }
 
 #directions--distance-range {
-  width: 157px;
+  /* width: 157px; */
+  width: 100%;
 }
 
 .directions--distance-picker {
