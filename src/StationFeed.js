@@ -20,7 +20,7 @@ class StationFeed {
       fetch(config.stationsUrl)
         .then(resp => resp.json())
         .then((data) => {
-          console.log('fetched stations: ', data);
+          // console.log('fetched stations: ', data);
           stations = data;
           // setStations(data);
         });

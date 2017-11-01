@@ -124,7 +124,8 @@ export default function initMap(center, zoom = 8) {
  * @param {String} location - origin or destination
  */
 export function flyTo(location) {
-  console.log(`flying to: ${[state[location].longitude, state[location].latitude]} (${state[location].address})`);
+  // console.log(`flying to:
+  // ${[state[location].longitude, state[location].latitude]} (${state[location].address})`);
   map.flyTo({
     center: [state[location].longitude, state[location].latitude],
     zoom: 14,
@@ -140,11 +141,12 @@ const endpointMarkers = {};
  */
 export function renderDirectionsMarker(location) {
   if (endpointMarkers[location]) {
-    console.log(`setting endpoint for ${location} to ${[state[location].longitude, state[location].latitude]}`);
+    // console.log(`setting endpoint for ${location} to
+    // ${[state[location].longitude, state[location].latitude]}`);
     endpointMarkers[location].setLngLat([state[location].longitude, state[location].latitude]);
     // endpointMarkers[location].addTo(map);
   } else {
-    console.log(`creating ${location} marker`);
+    // console.log(`creating ${location} marker`);
     const el = document.createElement('div');
     el.className = `marker map-marker-directions is-${location}`;
     endpointMarkers[location] = new mapboxgl.Marker(el)
@@ -281,7 +283,7 @@ function clearStationsNear(location) {
  * update nearby results.
  */
 export function mapUpdateNearby() {
-  console.log('mapupdatenearby()');
+  // console.log('mapupdatenearby()');
 
   ['origin', 'destination'].forEach((location) => {
     if (state[location].latitude && state[location].longitude) {
@@ -316,7 +318,6 @@ function mapClearRoute() {
 function mapUpdateRoute() {
   if (state.origin.latitude && state.destination.latitude) {
     fetchRoute(state.origin, state.destination, (routeLineString) => {
-
       let source = map.getSource('route');
       if (source) {
         source.setData(routeLineString);
@@ -358,8 +359,8 @@ function mapUpdateRoute() {
  * Add or remove endpoint marker and update nearby stations.
  * @param {String} location origin or destination
  */
-export function mapUpdateDirectionsEndpoint(location, stateLocation) {
-  console.log('mapUpdateDirectionsEndpoint()');
+export function mapUpdateDirectionsEndpoint(location) {
+  // console.log('mapUpdateDirectionsEndpoint()');
   mapUpdateRoute();
   if (state[location].latitude === null && endpointMarkers[location]) {
     // clear marker
