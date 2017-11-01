@@ -2,6 +2,7 @@ import turfCircle from '@turf/circle';
 import { featureCollection as turfFeatureCollection, point as turfPoint } from '@turf/helpers';
 import turfWithin from '@turf/within';
 
+import StationFeed from './StationFeed';
 import getPopupContent from './popups';
 import userGeolocate from './userGeolocate';
 import fetchRoute from './router';
@@ -16,7 +17,8 @@ let map;
 function addStations() {
   map.on('load', () => {
     window.setInterval(() => {
-      map.getSource('stations-source').setData(stationsURL);
+      map.getSource('stations-source').setData(StationFeed.getStations());
+      // map.getSource('stations-source').setData(stationsURL);
       console.log('refetching live station data'); // eslint-disable-line
     }, 30 * 1000); // every N seconds (in milliseconds)
 
@@ -75,10 +77,15 @@ function addEmptyStationsNearbySources() {
     map.addSource('stations-near-origin', {
       type: 'geojson',
       data: emptyFeatureSet,
+      maxzoom: 22, // otherwise we get precision / misalignment errors
+      // might relate to:
+      // https://github.com/mapbox/mapbox-gl-js/issues/2279
+      // https://github.com/mapbox/mapbox-gl-js/issues/1733
     });
     map.addSource('stations-near-destination', {
       type: 'geojson',
       data: emptyFeatureSet,
+      maxzoom: 22,
     });
   });
 }
@@ -117,6 +124,7 @@ export default function initMap(center, zoom = 8) {
  * @param {String} location - origin or destination
  */
 export function flyTo(location) {
+  console.log(`flying to: ${[state[location].longitude, state[location].latitude]} (${state[location].address})`);
   map.flyTo({
     center: [state[location].longitude, state[location].latitude],
     zoom: 14,
@@ -124,20 +132,22 @@ export function flyTo(location) {
 }
 
 
-// endpoint markers
-const markers = {};
+const endpointMarkers = {};
 
 /**
  * Add or update the origin or destination marker
  * @param {String} location - origin or destination
  */
 export function renderDirectionsMarker(location) {
-  if (markers[location]) {
-    markers[location].setLngLat([state[location].longitude, state[location].latitude]);
+  if (endpointMarkers[location]) {
+    console.log(`setting endpoint for ${location} to ${[state[location].longitude, state[location].latitude]}`);
+    endpointMarkers[location].setLngLat([state[location].longitude, state[location].latitude]);
+    // endpointMarkers[location].addTo(map);
   } else {
+    console.log(`creating ${location} marker`);
     const el = document.createElement('div');
     el.className = `marker map-marker-directions is-${location}`;
-    markers[location] = new mapboxgl.Marker(el)
+    endpointMarkers[location] = new mapboxgl.Marker(el)
       .setLngLat([state[location].longitude, state[location].latitude])
       .addTo(map);
   }
@@ -157,7 +167,9 @@ function getStationsNear(location) {
   }
 
   // get all stations
-  const stations = map.querySourceFeatures('stations-source');
+  const stations = StationFeed.getStationsArray();
+  // const stations = map.querySourceFeatures('stations-source');
+  // can't use querySourceFeatures: only looks in visible area
   // if needed, use filter to limit result set (only those w/ available bikes, etc).
   // https://www.mapbox.com/mapbox-gl-js/api/#map#querysourcefeatures
 
@@ -208,6 +220,12 @@ function getStationsNear(location) {
 //   return [empty, available];
 // }
 
+
+function getLayerIdForStationsNear(location) {
+  return `stations-near-${location}`;
+}
+
+
 /**
  * Highlight the given stations near the given location
  * @param {String} location - origin or destination
@@ -217,30 +235,42 @@ function showStationsNear(location, stations) {
   // draw stations as markers on the map
   console.log(`showing stations nearby ${location}: `, stations);
 
-  const layerAndSourceId = `stations-near-${location}`;
+  const layerAndSourceId = getLayerIdForStationsNear(location);
   const availableCritera = location === 'origin' ? 'availableBikes' : 'availableDocks';
 
-  // const [empty, available] = splitEmptyOrAvailable(location, stations);
+  console.log('adding matching nearby stations');
   map.getSource(layerAndSourceId).setData(stations);
 
-  // Create a new circle layer from the 'nearest-library' data source
-  map.addLayer({
-    id: layerAndSourceId,
-    type: 'circle',
-    source: layerAndSourceId,
-    paint: {
-      'circle-radius': 12, // bikeshare icon is 24px (scaled by 1/2 so 12)
-      'circle-color': {
-        property: availableCritera,
-        stops: [
-          // "available": 0   -> circle color will be red
-          [0, 'red'],
-          // "available": 1 or more -> circle color will be green
-          [1, 'lightseagreen'],
-        ],
+  const layer = map.getLayer(layerAndSourceId);
+  if (!layer) { // should only need to do this once.
+    // Create a new circle layer from the data source
+    map.addLayer({
+      id: layerAndSourceId,
+      type: 'circle',
+      source: layerAndSourceId,
+      paint: {
+        'circle-radius': 12, // bikeshare icon is 24px (scaled by 1/2 so 12)
+        'circle-color': {
+          property: availableCritera,
+          stops: [
+            // "available": 0   -> circle color will be red
+            [0, 'red'],
+            // "available": 1 or more -> circle color will be green
+            [1, 'lightseagreen'],
+          ],
+        },
       },
-    },
-  }, 'bikeshare-stations'); // place color beneath bikeshare icons
+    }, 'bikeshare-stations'); // place color beneath bikeshare icons
+  }
+}
+
+
+function clearStationsNear(location) {
+  const layerID = getLayerIdForStationsNear(location);
+  const layer = map.getLayer(layerID);
+  if (layer) {
+    map.removeLayer(layerID);
+  }
 }
 
 
