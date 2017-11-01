@@ -27,9 +27,8 @@
     "start-prod": "cd dist && http-server -S -C ../ssl/cert.pem -K ../ssl/key.pem -p 8081",
     "build-debug": "webpack --display-modules",
     "clean": "rm -rf dist/*",
-    "start": "cd dist && http-server -p 3000",
-    "lint": "./node_modules/eslint/bin/eslint.js src/",
-    "lintfix": "./node_modules/eslint/bin/eslint.js --fix src/"
+    "lint": "./node_modules/.bin/eslint src/",
+    "lintfix": "./node_modules/.bin/eslint --fix src/"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
