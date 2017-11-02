@@ -28,41 +28,28 @@
     <div id='map' style='width: 100%; height: 100%; min-height:100%'></div>
 
     <div class="directions">
-      <div class="columnx">
-        <div class="field column">
-          <label class="label">Origin</label>
-          <div class="control columns">
-            <!-- <div class="column">
-              <i class="fa fa-location-arrow" aria-hidden="true"></i>
-            </div> -->
-            <div class="column is-10">
-              <input id="originInput" class="input" type="text" placeholder="Origin">
-            </div>
-            <div class="column directions--locate-origin">
-              <button class="button is-outlined">
-              </button>
-              <!-- <img src="locate-person.svg" /> -->
-            </div>
+      <div class="directions--field-origin field">
+        <!-- <label class="label">Origin</label> -->
+        <div class="control columns is-mobile">
+          <div class="column is-10">
+            <input id="originInput" class="input" type="text" placeholder="Origin">
+          </div>
+          <div class="column directions--locate-origin">
+            <button class="button is-outlined">
+            </button>
           </div>
         </div>
-        <div class="field column">
-          <label class="label">Destination</label>
-          <div class="control">
-            <input id="destinationInput" class="input" type="text" placeholder="Destination">
-          </div>
+      </div>
+      <div class="directions--field-destination field">
+        <!-- <label class="label">Destination</label> -->
+        <div class="control">
+          <input id="destinationInput" class="input" type="text" placeholder="Destination">
         </div>
-        <div class="column directions--distance-picker">
-          <label class="label">Max. walk: <span id="directions--distance-value">0.25 mi.</span></label>
-          <div class="control">
-            <!-- <input id="directions--distance-picker" value="0.25" type="range" min="0" max="2" step="0.25" list="tickmarks"> -->
-            <!-- <div id="directions--distance-slider"></div> -->
-            <div id="directions--distance-range"></div>
-            <!-- <datalist id="tickmarks">
-                <option value="0">
-                <option value="1">
-                <option value="2">
-              </datalist> -->
-          </div>
+      </div>
+      <div class="directions--distance-picker">
+        <label class="label">Max. walk: <span id="directions--distance-value">0.25 mi.</span></label>
+        <div class="control">
+          <div id="directions--distance-range"></div>
         </div>
       </div>
     </div>
