@@ -289,17 +289,6 @@ export function mapUpdateNearby() {
     if (state[location].latitude && state[location].longitude) {
       const nearbyStations = getStationsNear(location);
       console.log(`got stations near ${location}`, nearbyStations);
-
-      // if (map.isMoving()) {
-      //   console.log('NOTE: map was moving, rescheduling station update to end of move');
-      //   map.once('moveend', () => {
-      //     console.log('station update after move end');
-      //     showStationsNear(location, nearbyStations);
-      //   });
-      // } else {
-      //   console.log('map not moving; doing station update');
-      //   showStationsNear(location, nearbyStations);
-      // }
       showStationsNear(location, nearbyStations);
     } else { // if we *don't* have a particular location endpoint,
       // then we need to clear the markers
