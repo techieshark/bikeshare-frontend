@@ -49,7 +49,7 @@ function addStations() {
 function addPopups() {
   map.on('click', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
-      layers: ['stations-layer'], // replace this with the name of the layer
+      layers: ['stations-layer'],
     });
 
     if (!features.length) {
