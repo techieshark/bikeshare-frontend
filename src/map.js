@@ -104,14 +104,14 @@ export default function initMap(center, zoom = 8) {
   });
 
   // Add geolocate control to the map.
-  const geolocateControl = new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true,
-    },
-    trackUserLocation: true,
-  });
-  map.addControl(geolocateControl);
-  geolocateControl.on('geolocate', userGeolocate);
+  // const geolocateControl = new mapboxgl.GeolocateControl({
+  //   positionOptions: {
+  //     enableHighAccuracy: true,
+  //   },
+  //   trackUserLocation: true,
+  // });
+  // map.addControl(geolocateControl);
+  // geolocateControl.on('geolocate', userGeolocate);
 
   addEmptyStationsNearbySources();
   // fetchStations();
