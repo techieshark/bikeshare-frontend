@@ -31,6 +31,7 @@ export default function initOriginLocatorBtn() {
         userReverseGeocode((err, data, address) => {
           orig.value = address;
           state.user.address = address;
+          state.origin.address = address;
         });
       });
     }

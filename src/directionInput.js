@@ -11,7 +11,7 @@ let lastAutocompleteSelection = null;
  * Hooks an input up to an autocomplete service
  * @param {String} elId element id of the input which should be autocompleted
  */
-function initAutocomplete(elId) {
+function initAutocomplete(elId, location) {
   const input = document.getElementById(elId);
 
   autocomplete({
@@ -49,6 +49,7 @@ function initAutocomplete(elId) {
       lastAutocompleteSelection = item;
       console.log('SELECTED item:', item);
       input.value = item.feature.place_name;
+      state[location].address = item.feature.place_name;
     },
   });
 }
@@ -120,6 +121,6 @@ export default function initDirectionInput(elId, location) {
   input.onchange = geocodingChangeHandler(location);
 
   // enable autocomplete
-  initAutocomplete(elId);
+  initAutocomplete(elId, location);
 }
 

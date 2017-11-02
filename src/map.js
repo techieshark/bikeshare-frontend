@@ -46,21 +46,56 @@ function addStations() {
   });
 }
 
+
+function getLayerIdForStationsNear(location) {
+  return `stations-near-${location}`;
+}
+
+/**
+ *
+ * @param {*} e - event from map.on('click')
+ * @param {string} location - origin or destination
+ */
+function queryFeaturesNear(e, location) {
+  const layerId = getLayerIdForStationsNear(location);
+  if (map.getLayer(layerId)) {
+    return map.queryRenderedFeatures(e.point, {
+      layers: [layerId],
+    });
+  }
+  return []; // no features because no layer
+}
+
 function addPopups() {
   map.on('click', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
       layers: ['stations-layer'],
     });
 
-    if (!features.length) {
+    const featuresNearOrigin = queryFeaturesNear(e, 'origin');
+    const featuresNearDestination = queryFeaturesNear(e, 'destination');
+
+    if (!featuresNearOrigin.length && !featuresNearDestination.length && !features.length) {
       return;
     }
 
-    const feature = features[0];
+    let feature;
+    let location = null;
+
+    if (featuresNearOrigin.length) {
+      location = 'origin';
+      [feature] = featuresNearOrigin;
+    } else if (featuresNearDestination.length) {
+      location = 'destination';
+      [feature] = featuresNearDestination;
+    } else {
+      [feature] = features;
+    }
+    const popupContent = getPopupContent(feature, location);
 
     const popup = new mapboxgl.Popup({ offset: [0, -15] })
       .setLngLat(feature.geometry.coordinates)
-      .setHTML(getPopupContent(feature))
+      .setHTML(popupContent)
       .setLngLat(feature.geometry.coordinates)
       .addTo(map);
     // eslint-disable-next-line no-underscore-dangle
@@ -221,11 +256,6 @@ function getStationsNear(location) {
 
 //   return [empty, available];
 // }
-
-
-function getLayerIdForStationsNear(location) {
-  return `stations-near-${location}`;
-}
 
 
 /**
