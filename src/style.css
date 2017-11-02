@@ -31,9 +31,31 @@ canvas.mapboxgl-canvas {
 
 .directions {
   position: absolute;
-  padding: 1em;
   margin: 1em;
   background: rgba(255, 255, 255, 0.85);
+}
+
+.directions--content {
+  padding: 1em;
+}
+
+.directions--toggle-button {
+  background: #4AB2F7;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60px;
+  cursor: pointer;
+}
+
+.directions--toggle-button.shown {
+  background-image: url('directions-up.svg');
+}
+.directions--toggle-button.hidden {
+  background-image: url('directions-down.svg');
+}
+
+.directions--toggle-button {
+  height: 2em;
 }
 
 #directions--distance-range {
