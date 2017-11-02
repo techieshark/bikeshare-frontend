@@ -5,6 +5,8 @@ import { mapUpdateDirectionsEndpoint } from './map';
 
 import state from './state';
 
+let lastAutocompleteSelection = null;
+
 /**
  * Hooks an input up to an autocomplete service
  * @param {String} elId element id of the input which should be autocompleted
@@ -15,17 +17,26 @@ function initAutocomplete(elId) {
   autocomplete({
     input: document.getElementById(elId),
     fetch: (text, update) => {
+      console.log('on fetch for input');
       geocode(text, (err, geoData) => {
         if (!err) {
           const d = geoData;
-          // console.log(`result from geocoding ${text}: `, d);
+          console.log(`result from geocoding ${text}: `, d);
           // ensure result looks as we expect from the API
           if (d.type === 'FeatureCollection' && d.features && d.features.length > 0) {
             // map d.features into useful format.
             // return {label:..., item:..} obj - the format
             // specified here: https://github.com/kraaden/autocomplete
             const featureToSuggestion = feature =>
-              ({ label: feature.place_name, item: feature });
+              ({
+                label: feature.place_name,
+                item: {
+                  feature,
+                  // make text and label available to onSelect():
+                  label: feature.place_name,
+                  text,
+                },
+              });
             const suggestions = d.features.map(featureToSuggestion);
             update(suggestions);
           }
@@ -35,12 +46,26 @@ function initAutocomplete(elId) {
       });
     },
     onSelect: (item) => {
-      // console.log('SELECTED item:', item);
-      input.value = item.place_name;
+      lastAutocompleteSelection = item;
+      console.log('SELECTED item:', item);
+      input.value = item.feature.place_name;
     },
   });
 }
 
+/**
+ * Update state from feature returned by geocoder.
+ * @param {string} location origin or destination.
+ * @param {GeoJSON Feature} feature A valid geojson feature.
+ */
+function updateLocationFromFeature(location, feature) {
+  if (feature.place_name) {
+    state[location].address = feature.place_name;
+  }
+  if (feature.center) {
+    [state[location].longitude, state[location].latitude] = feature.center;
+  }
+}
 
 /**
  * returns a change handler which updates global state location
@@ -60,28 +85,23 @@ function geocodingChangeHandler(location) {
     console.log('geocoding address: ', addr);
     geocode(addr, (err, geoData) => {
       if (!err) {
-        const d = geoData;
-        console.log(`result from geocoding ${addr}: `, d);
-        if ( // ensure result looks as we expect from the API
-          d.type === 'FeatureCollection' && d.features && d.features.length > 0
-        ) {
-          if (d.features[0].place_name) {
-            // console.log(`updating address for ${location} from
-            //   ${state[location].address} to
-            //   ${d.features[0].place_name}`);
-            state[location].address = d.features[0].place_name;
+        if (lastAutocompleteSelection) {
+          console.log('we should not have run geocoder');
+          // hold on - user selected an autocomplete suggestion,
+          // we should use that instead of this result based on a partial text.
+          updateLocationFromFeature(location, lastAutocompleteSelection.feature);
+          // handled, can reset:
+          lastAutocompleteSelection = null;
+        } else {
+          const d = geoData;
+          console.log(`result from geocoding ${addr}: `, d);
+          // ensure result looks as we expect from the API
+          if (d.type === 'FeatureCollection' && d.features && d.features.length > 0) {
+            updateLocationFromFeature(location, d.features[0]);
           }
-          if (d.features[0].center) {
-            // console.log(`updating lon for ${location} from
-            //   ${state[location].longitude},${state[location].latitude} to
-            //   ${d.features[0].center}`);
-            [state[location].longitude, state[location].latitude] = d.features[0].center;
-            console.log('gecoder returned coords:', [state[location].longitude, state[location].latitude]);
-          }
-          // console.log('app state:', state);
-          mapUpdateDirectionsEndpoint(location);
         }
-        // callback(err, geoData, state.destinationAddr);
+        // console.log('app state:', state);
+        mapUpdateDirectionsEndpoint(location);
       } else {
         console.log(`error geocoding ${addr}: ${err}`); //eslint-disable-line
       }
