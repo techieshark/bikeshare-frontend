@@ -13,7 +13,7 @@
     "@turf/helpers": "^5.0.1",
     "@turf/within": "^4.7.3",
     "autocompleter": "^1.0.29",
-    "mapbox-geocoding": "https://github.com/techieshark/mapbox-geocoding/tarball/e2f450b1ca8b50d42c7ffc32e8e15cb8fbf1e98c",
+    "mapbox-geocoding": "https://github.com/techieshark/mapbox-geocoding/tarball/a83ef15a027f646b0dcaa7608ca5c33e4314dd92",
     "nouislider": "^10.1.0"
   },
   "scripts": {
