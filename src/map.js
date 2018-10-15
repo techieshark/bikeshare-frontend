@@ -131,6 +131,7 @@ function addEmptyStationsNearbySources() {
  * @param {[lon,lat]} center: lon,lat coords on which to center the view
  */
 export default function initMap(center, zoom = 8) {
+  mapboxgl.accessToken = config.mapboxToken;
   map = new mapboxgl.Map({
     container: 'map',
     style: config.mapStyle,

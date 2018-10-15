@@ -49,7 +49,7 @@ function initAutocomplete(elId, location) {
       lastAutocompleteSelection = item;
       console.log('SELECTED item:', item);
       input.value = item.feature.place_name;
-      state[location].address = item.feature.place_name;
+      state[location].address = item.feature.properties.address || item.feature.place_name;
     },
   });
 }
