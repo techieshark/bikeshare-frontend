@@ -352,7 +352,13 @@ function mapUpdateRoute() {
       if (source) {
         source.setData(routeLineString);
       } else {
-        source = map.addSource('route', { type: 'geojson', data: routeLineString });
+        source = map.addSource(
+          'route',
+          {
+            type: 'geojson',
+            data: routeLineString,
+          },
+        );
       }
 
       // place route beneath nearby markers (themselves beneath stations)
