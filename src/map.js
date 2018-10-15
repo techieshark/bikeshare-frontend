@@ -328,6 +328,10 @@ export function mapUpdateNearby() {
   });
 }
 
+/**
+ * Remove the route layer, if it existed.
+ * @return undefined
+ */
 function mapClearRoute() {
   const routeLayer = map.getLayer('route');
   if (routeLayer) {
@@ -335,6 +339,12 @@ function mapClearRoute() {
   }
 }
 
+/**
+ * Updates map's route.
+ * If the start and endpoint are known, the route is updated.
+ * If either is unkown, we clear the route.
+ * @return undefined
+ */
 function mapUpdateRoute() {
   if (state.origin.latitude && state.destination.latitude) {
     fetchRoute(state.origin, state.destination, (routeLineString) => {
