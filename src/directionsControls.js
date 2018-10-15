@@ -11,7 +11,7 @@ function initDirectionsToggle() {
     const content = document.getElementsByClassName('directions--content')[0];
     if (shown) {
       // first ensure the toggle button doesn't disappear
-      toggle.style.width = content.offsetWidth + 'px';
+      toggle.style.width = `${content.clientWidth}px`;
       content.style.display = 'none';
     } else {
       toggle.style.width = '100%';
