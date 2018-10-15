@@ -399,7 +399,7 @@ export function mapUpdateDirectionsEndpoint(location) {
     console.log(`clearing ${location} marker (no latitude)`);
     endpointMarkers[location].remove();
     endpointMarkers[location] = null;
-  } else {
+  } else if (state[location].latitude !== null) {
     renderDirectionsMarker(location);
     flyTo(location);
   }
