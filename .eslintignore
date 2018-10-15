@@ -1,5 +1,0 @@
-src/vendor/*
-dist/*
-main.js
-ignore/
-webpack.config.js
