@@ -354,10 +354,6 @@ function mapUpdateRoute() {
         id: 'route',
         type: 'line',
         source: 'route',
-        //  {
-        //   type: 'geojson',
-        //   data: routeLineString,
-        // },
         layout: {
           'line-join': 'round',
           'line-cap': 'round',
