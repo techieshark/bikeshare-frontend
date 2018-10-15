@@ -19,6 +19,7 @@
   "scripts": {
     "build": "webpack && cp src/index.html dist/",
     "build-min": "webpack --optimize-minimize && cp src/index.html dist/",
+    "deploy": "gh-pages -d dist",
     "watch": "webpack --progress --watch",
     "start": "cp src/index.html dist/ && webpack-dev-server --https --cert=ssl/cert.pem --key=ssl/key.pem --open",
     "start-prod": "cd dist && http-server -S -C ../ssl/cert.pem -K ../ssl/key.pem -p 8081",
@@ -37,6 +38,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "file-loader": "^1.1.5",
+    "gh-pages": "^2.0.1",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
