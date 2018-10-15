@@ -5,7 +5,10 @@ module.exports = {
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    },
   },
   output: {
     filename: 'bundle.js',
@@ -49,4 +52,3 @@ module.exports = {
     tls: 'empty',
   },
 };
-
