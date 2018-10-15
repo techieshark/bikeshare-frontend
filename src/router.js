@@ -40,5 +40,6 @@ export default function fetchRoute(a, b, callback) {
     })
     .catch((error) => {
       console.log('error fetching route: ', error);
+      throw Error('Error while requesting directions.');
     });
 }
