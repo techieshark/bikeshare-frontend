@@ -21,7 +21,7 @@ function initAutocomplete(elId, location) {
       geocode(text, (err, geoData) => {
         if (!err) {
           const d = geoData;
-          console.log(`result from geocoding ${text}: `, d);
+          // console.log(`result from geocoding ${text}: `, d);
           // ensure result looks as we expect from the API
           if (d.type === 'FeatureCollection' && d.features && d.features.length > 0) {
             // map d.features into useful format.
@@ -83,7 +83,7 @@ function geocodingChangeHandler(location) {
       mapUpdateDirectionsEndpoint(location);
       return;
     }
-    console.log('geocoding address: ', addr);
+    // console.log('geocoding address: ', addr);
     geocode(addr, (err, geoData) => {
       if (!err) {
         if (lastAutocompleteSelection) {
@@ -95,7 +95,7 @@ function geocodingChangeHandler(location) {
           lastAutocompleteSelection = null;
         } else {
           const d = geoData;
-          console.log(`result from geocoding ${addr}: `, d);
+          // console.log(`result from geocoding ${addr}: `, d);
           // ensure result looks as we expect from the API
           if (d.type === 'FeatureCollection' && d.features && d.features.length > 0) {
             updateLocationFromFeature(location, d.features[0]);
