@@ -11,21 +11,22 @@ window.appState = state; // XXX for console debugging.
 
 /* Initialization *************************** */
 
+function ready(fn) {
+  if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+
 function initPage(lngLat, zoom) {
   const doInit = () => {
     initMap(lngLat, zoom);
     initDirectionsControls();
   };
 
-  if (document.readyState === 'complete' || document.readyState === 'loaded') {
-    // document is already ready to go
-    doInit();
-  } else {
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('loading page');
-      doInit();
-    }, false);
-  }
+  ready(doInit);
 }
 
 (function init() {
