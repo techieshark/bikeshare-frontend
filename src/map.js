@@ -4,7 +4,7 @@ import turfWithin from '@turf/within';
 
 import StationFeed from './StationFeed';
 import getPopupContent from './popups';
-import userGeolocate from './userGeolocate';
+// import userGeolocate from './userGeolocate';
 import fetchRoute from './router';
 
 import config from './config';
