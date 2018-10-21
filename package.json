@@ -23,6 +23,7 @@
     "watch": "webpack --progress --watch",
     "start": "cp src/index.html dist/ && webpack-dev-server --https --cert=ssl/cert.pem --key=ssl/key.pem --open",
     "start-prod": "cd dist && http-server -S -C ../ssl/cert.pem -K ../ssl/key.pem -p 8081",
+    "server": "http-server -p 3000 --cors",
     "build-debug": "webpack --display-modules",
     "clean": "rm -rf dist/*",
     "lint": "./node_modules/.bin/eslint src/",
