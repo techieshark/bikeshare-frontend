@@ -97,12 +97,21 @@ canvas.mapboxgl-canvas {
 }
 
 
-.directions--locate-origin.column {
+.directions--locate-origin.column,
+.directions--swap-endpoints.column {
   padding-left: 0;
 }
 
 .directions--locate-origin button {
   background-image: url('img/locate-person.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  width: 38px;
+}
+
+.directions--swap-endpoints button {
+  background-image: url('img/u-turn.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
