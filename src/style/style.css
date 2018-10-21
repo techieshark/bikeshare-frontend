@@ -91,7 +91,7 @@ canvas.mapboxgl-canvas {
   color: white;
   padding: 0 2px;
 }
-.directions input:focus ~ label,
+
 .directions input:valid ~ label {
   opacity: 1;
 }
