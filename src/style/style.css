@@ -77,11 +77,31 @@ canvas.mapboxgl-canvas {
   height: 50px; /* was 80 which ate into button below */
 }
 
+/** Hide label until overwritten with input */
+.directions label {
+  opacity: 0;
+  transition: opacity 0.25s;
+  position: absolute;
+  top: -3px;
+  left: 16px;
+  font-size: 10px;
+
+  border: none;
+  background: #c5d7f1; /* match input box-shadow */
+  color: white;
+  padding: 0 2px;
+}
+.directions input:focus ~ label,
+.directions input:valid ~ label {
+  opacity: 1;
+}
+
+
 .directions--locate-origin.column {
   padding-left: 0;
 }
 
-.directions--locate-origin button{
+.directions--locate-origin button {
   background-image: url('img/locate-person.svg');
   background-repeat: no-repeat;
   background-position: center;

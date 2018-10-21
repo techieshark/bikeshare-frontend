@@ -28,10 +28,10 @@
     <div class="directions">
       <div class="directions--content">
         <div class="directions--field-origin field">
-          <!-- <label class="label">Origin</label> -->
           <div class="control columns is-mobile">
             <div class="column is-10">
-              <input id="originInput" class="input" type="text" placeholder="Origin">
+              <input id="originInput" class="input" type="text" placeholder="Pick start location" required>
+              <label class="label">Origin</label>
             </div>
             <div class="column directions--locate-origin">
               <button class="button is-outlined">
@@ -40,9 +40,11 @@
           </div>
         </div>
         <div class="directions--field-destination field">
-          <!-- <label class="label">Destination</label> -->
-          <div class="control">
-            <input id="destinationInput" class="input" type="text" placeholder="Destination">
+          <div class="control columns is-mobile">
+            <div class="column is-12">
+              <input id="destinationInput" class="input" type="text" placeholder="Pick destination" required>
+              <label class="label">Destination</label>
+            </div>
           </div>
         </div>
         <div class="directions--distance-picker">
