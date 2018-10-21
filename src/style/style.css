@@ -3,7 +3,7 @@ canvas.mapboxgl-canvas {
 }
 
 .marker {
-  background-image: url('noun_800600.png');
+  background-image: url('img/noun_800600.png');
   background-size: cover;
   width: 50px;
   height: 50px;
@@ -19,10 +19,10 @@ canvas.mapboxgl-canvas {
 }
 
 .map-marker-directions.is-origin {
-  background-image: url('map-dot-origin.svg');
+  background-image: url('img/map-dot-origin.svg');
 }
 .map-marker-directions.is-destination {
-  background-image: url('map-dot-destination.svg');
+  background-image: url('img/map-dot-destination.svg');
 }
 
 
@@ -48,10 +48,10 @@ canvas.mapboxgl-canvas {
 }
 
 .directions--toggle-button.shown {
-  background-image: url('directions-up.svg');
+  background-image: url('img/directions-up.svg');
 }
 .directions--toggle-button.hidden {
-  background-image: url('directions-down.svg');
+  background-image: url('img/directions-down.svg');
 }
 
 .directions--toggle-button {
@@ -82,7 +82,7 @@ canvas.mapboxgl-canvas {
 }
 
 .directions--locate-origin button{
-  background-image: url('locate-person.svg');
+  background-image: url('img/locate-person.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;

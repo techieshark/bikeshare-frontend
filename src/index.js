@@ -1,6 +1,6 @@
-import './style.css';
+import './style/style.css';
 import './vendor/nouislider.min.css';
-import './favicon.ico';
+import './style/img/favicon.ico';
 
 import initDirectionsControls from './directionsControls';
 import initMap from './map';
