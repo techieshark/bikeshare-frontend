@@ -43,11 +43,13 @@ function initPage(lngLat, zoom) {
   Number.prototype.between = (min, max) => this > min && this < max;
 
   // Grab IP location from freegeoip API
-  const geoLocationProviderURL = 'https://ipinfo.io/json';
+  const geoLocationProviderURL = 'https://www.geoip-db.com/json/';
   fetch(geoLocationProviderURL)
     .then(resp => resp.json())
     .then((data) => {
-      const [latitude, longitude] = data.loc.split(',').map(parseFloat);
+      const { latitude: latString, longitude: longString } = data;
+      const longitude = parseFloat(longString);
+      const latitude = parseFloat(latString);
       // Because this bike share only operates in the SF bay area, we
       // jump to the user's specific location only if they're inside a
       // bay-centered bounding area.
