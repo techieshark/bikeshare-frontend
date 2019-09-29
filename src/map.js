@@ -1,6 +1,6 @@
 import turfCircle from '@turf/circle';
 import { featureCollection as turfFeatureCollection, point as turfPoint } from '@turf/helpers';
-import turfWithin from '@turf/within';
+import turfWithin from '@turf/points-within-polygon';
 
 import StationFeed from './StationFeed';
 import getPopupContent from './popups';
